@@ -7,7 +7,10 @@ notifications:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - pip install coveralls
 # command to run tests
 script:
-  - python manage.py test
   - flake8
+  - coverage run --source=questionnaire manage.py test
+after_success:
+  - coveralls
