@@ -8,4 +8,4 @@ install:
 # command to run tests
 script:
   - python manage.py test
-  - flak8
+  - flake8
