@@ -11,3 +11,4 @@ class UserTestCase(TestCase):
     def test_user_created_successfully(self):
         all_users = User.objects.all()
         self.assertEqual(len(all_users), 1)
+        self.assertEqual(all_users[0].email, 'admin@email.com')
