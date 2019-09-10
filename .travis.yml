@@ -9,6 +9,10 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
 # command to run tests
+services:
+  - postgresql
+before_script:
+  - psql -c 'CREATE DATABASE questionnaire_test_db;' -U postgres
 script:
   - flake8
   - coverage run --source=questionnaire manage.py test
