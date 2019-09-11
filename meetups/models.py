@@ -19,3 +19,6 @@ class MeetUp(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='meet_ups')
     tags = models.ManyToManyField(Tag, related_name='tags')
+
+    def __str__(self):
+        return self.name

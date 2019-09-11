@@ -11,6 +11,9 @@ class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='questions')
 
+    def __str__(self):
+        return self.body
+
 
 class Comment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -19,3 +22,6 @@ class Comment(models.Model):
                                  related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='comments')
+
+    def __str__(self):
+        return self.body
