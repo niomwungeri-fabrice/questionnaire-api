@@ -41,6 +41,8 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    phone_number = models.CharField(max_length=30)
+    registered = models.DateTimeField(auto_now_add=True)
     username = None
     email = models.EmailField(_('email address'), unique=True)
     USERNAME_FIELD = 'email'
