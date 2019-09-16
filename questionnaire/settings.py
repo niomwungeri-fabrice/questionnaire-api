@@ -26,7 +26,7 @@ SECRET_KEY = 'x&hlfs+uv)v_@7nue#+1#1!4v#47v*2p90pa^0v%a^i%hjij&a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
