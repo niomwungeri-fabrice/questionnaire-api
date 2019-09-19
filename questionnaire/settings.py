@@ -26,7 +26,7 @@ SECRET_KEY = 'x&hlfs+uv)v_@7nue#+1#1!4v#47v*2p90pa^0v%a^i%hjij&a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'accounts.apps.AccountsConfig',
     'meetups.apps.MeetupsConfig',
     'questions.apps.QuestionsConfig',
+
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -49,12 +51,18 @@ AUTH_USER_MODEL = 'accounts.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
+
 
 ROOT_URLCONF = 'questionnaire.urls'
 
