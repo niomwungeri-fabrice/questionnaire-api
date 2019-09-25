@@ -13,7 +13,7 @@ class UserManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
         """Saving user implementation"""
         if not email:
-            ValueError('Email is required.')
+            raise ValueError('Email is required.')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
