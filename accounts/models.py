@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 import uuid
+from datetime import datetime
 
 
 class UserManager(BaseUserManager):
@@ -44,7 +45,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=250)
     first_name = models.CharField(null=True, max_length=30)
     last_name = models.CharField(null=True, max_length=150)
-    registered = models.DateTimeField(auto_now_add=True, blank=True)
+    registered = models.DateTimeField(datetime.now, blank=True, null=True)
     username = None
     email = models.EmailField(_('email address'), unique=True)
     USERNAME_FIELD = 'email'
