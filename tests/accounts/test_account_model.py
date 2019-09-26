@@ -24,7 +24,7 @@ def sample_super_user(email=test_user['email'],
     return user
 
 
-class UserTestCase(TestCase):
+class AccountModelTestCase(TestCase):
     def test_user_creation_successfully(self):
         user = sample_user()
         self.assertTrue(user.email, test_user['email'])

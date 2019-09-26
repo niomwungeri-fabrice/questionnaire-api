@@ -3,6 +3,8 @@ from django.urls import path
 from . import views
 from rest_framework_simplejwt import views as jwt_views
 
+app_name = 'accounts'
+
 urlpatterns = [
     path('register/', views.CreateAccountView.as_view(),
          name='user-register'),
@@ -14,5 +16,6 @@ urlpatterns = [
          name='user-list'),
     path('users/<uuid:id>/', views.UserDetailView.as_view(),
          name='user-detail'),
-    path('hello/', views.HelloView.as_view(), name='hello'),
+    path('me/', views.CurrentUserView.as_view(),
+         name='me'),
 ]
