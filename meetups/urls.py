@@ -1,8 +1,14 @@
+from django.urls import path
+
 from . import views
-from rest_framework import routers
 
-router = routers.DefaultRouter()
-router.register('meetups', views.MeetUpViewSet)
-router.register('tags', views.TagViewSet)
+app_name = 'meetups'
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('meetup/new/', views.CreateMeetUpView.as_view(),
+         name='create-meetup'),
+    path('meetup/<str:id>/', views.MeetUpDetailView.as_view(),
+         name='detail-meetup'),
+    path('meetup/', views.MeetUpListView.as_view(),
+         name='list-meetups'),
+]

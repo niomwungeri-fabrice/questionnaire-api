@@ -9,11 +9,9 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'url', 'name']
 
 
-class MeetUpSerializer(serializers.HyperlinkedModelSerializer):
-    tags = serializers.PrimaryKeyRelatedField(many=True,
-                                              queryset=Tag.objects.all())
+class MeetUpSerializer(serializers.ModelSerializer):
+    # tags = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = MeetUp
-        fields = ['id', 'url', 'name', 'location', 'user', 'image_url',
-                  'tags']
+        fields = ['id', 'name', 'location', 'image_url', 'user_id']

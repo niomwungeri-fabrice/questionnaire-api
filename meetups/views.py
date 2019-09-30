@@ -1,13 +1,23 @@
-from .models import Tag, MeetUp
-from .serializers import TagSerializer, MeetUpSerializer
-from rest_framework import viewsets
+from meetups.models import MeetUp
+from .serializers import MeetUpSerializer
+from rest_framework import generics, permissions
 
 
-class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
+class CreateMeetUpView(generics.CreateAPIView):
+    serializer_class = MeetUpSerializer
+    permission_classes = (permissions.IsAdminUser,)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
-class MeetUpViewSet(viewsets.ModelViewSet):
+class MeetUpListView(generics.ListAPIView):
     queryset = MeetUp.objects.all()
     serializer_class = MeetUpSerializer
+
+
+class MeetUpDetailView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'id'
+    queryset = MeetUp.objects.all()
+    serializer_class = MeetUpSerializer
+    permission_classes = (permissions.IsAuthenticated,)
