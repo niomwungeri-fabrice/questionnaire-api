@@ -41,14 +41,14 @@ class Tag(models.Model):
 class MeetUp(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
-    location = models.CharField(max_length=250)
+    venue = models.CharField(max_length=250)
     image_url = models.ImageField(null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='meet_ups')
-    start_date = models.DateTimeField(datetime.now, blank=True, null=True)
-    end_date = models.DateTimeField(datetime.now, blank=True, null=True)
-    event_type = models.CharField(
-        choices=TYPES, default=TYPES.APPEARANCE_OR_SIGNING, max_length=250)
+    start_date = models.DateTimeField(datetime.now)
+    end_date = models.DateTimeField(datetime.now)
+    event_type = models.CharField(choices=TYPES, max_length=250)
+    organizer = models.CharField(max_length=250)
     tags = models.ManyToManyField(Tag, related_name='tags')
 
     def __str__(self):

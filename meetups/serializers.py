@@ -20,5 +20,5 @@ class MeetUpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MeetUp
-        fields = ['id', 'name', 'location', 'image_url', 'user_id',
-                  'event_type', 'date']
+        fields = ['id', 'name', 'venue', 'image_url', 'user_id',
+                  'event_type', 'start_date', 'end_date']
