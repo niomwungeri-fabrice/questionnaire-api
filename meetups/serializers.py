@@ -11,8 +11,6 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 
 class MeetUpSerializer(serializers.ModelSerializer):
     def validate(self, data):
-        if not data['event_type']:
-            raise serializers.ValidationError("Event Type is Required")
         if data['start_date'] > data['end_date']:
             raise serializers.ValidationError(
                 "End date must be after start date")

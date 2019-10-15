@@ -51,5 +51,8 @@ class MeetUp(models.Model):
     organizer = models.CharField(max_length=250)
     tags = models.ManyToManyField(Tag, related_name='tags')
 
+    class Meta:
+        unique_together = ('name', 'venue', 'event_type', 'organizer')
+
     def __str__(self):
         return self.name

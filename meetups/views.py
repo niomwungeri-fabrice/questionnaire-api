@@ -1,3 +1,6 @@
+from django.db import IntegrityError
+from rest_framework.exceptions import ValidationError
+
 from meetups.models import MeetUp
 from .serializers import MeetUpSerializer
 from rest_framework import generics, permissions
@@ -8,7 +11,11 @@ class CreateMeetUpView(generics.CreateAPIView):
     permission_classes = (permissions.IsAdminUser,)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        try:
+            serializer.save(user=self.request.user)
+        except IntegrityError:
+            content = {"detail": "MeetUp already exist"}
+            raise ValidationError(content)
 
 
 class MeetUpListView(generics.ListAPIView):

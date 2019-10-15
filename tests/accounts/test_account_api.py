@@ -4,6 +4,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 from tests.factories import AccountFactory
 
+# accounts:user-register => app_name:name(url)
 CREATE_ACCOUNT_ROUTE = reverse('accounts:user-register')
 CURRENT_ACCOUNT_ROUTE = reverse('accounts:me')
 
