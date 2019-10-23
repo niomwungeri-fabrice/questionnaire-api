@@ -23,7 +23,7 @@ $ docker-compose build
 
 ### Run
 ```sh
-$ docker-compose up (it will run migrations and start the server)
+$ docker-compose up # It will run migrations and start the server
 ```
 
 ## Getting Started(Without Docker)
@@ -47,8 +47,8 @@ $ python manage.py runserver
 
 ### Tests
 ```sh
-$ python manage.py test - Without coverage report
-$ coverage run manage.py test && coverage report - With coverage report
+$ python manage.py test # Without coverage report
+$ coverage run manage.py test && coverage report # With coverage report
 ```
 
 ## Built with 

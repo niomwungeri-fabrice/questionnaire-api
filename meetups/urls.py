@@ -11,4 +11,6 @@ urlpatterns = [
          name='detail-meetup'),
     path('meetup/', views.MeetUpListView.as_view(),
          name='list-meetups'),
+    path('tags/', views.CreateTagView.as_view(),
+         name='create-list-tags')
 ]

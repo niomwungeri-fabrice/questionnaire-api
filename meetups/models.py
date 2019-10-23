@@ -32,7 +32,7 @@ TYPES = Choices(
 
 class Tag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=250)
+    name = models.CharField(max_length=250, unique=True)
 
     def __str__(self):
         return self.name
@@ -45,8 +45,8 @@ class MeetUp(models.Model):
     image_url = models.ImageField(null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='meet_ups')
-    start_date = models.DateTimeField(datetime.now)
-    end_date = models.DateTimeField(datetime.now)
+    start_date = models.DateTimeField(default=datetime.now, blank=True)
+    end_date = models.DateTimeField(default=datetime.now, blank=True)
     event_type = models.CharField(choices=TYPES, max_length=250)
     organizer = models.CharField(max_length=250)
     tags = models.ManyToManyField(Tag, related_name='tags')
