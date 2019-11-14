@@ -41,6 +41,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    """Define a user model."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     phone_number = models.CharField(max_length=250)
     first_name = models.CharField(null=True, max_length=30)
