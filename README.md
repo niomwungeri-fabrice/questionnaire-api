@@ -5,6 +5,22 @@
 # Questionnaire REST API
 Crowd-source questions for a meetup. ​Questioner​​ helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log.
 
+## Resources
+
+| EndPoint| Functionality|
+| --------| -------------|
+|`GET /api/v1/admin`| Admin page |
+|`POST /api/v1/register`| Create user account|
+|`POST /api/v1/token`|Obtain authentication JWT token / SignIn|
+|`GET /api/v1/token/refresh`|Refresh token|
+|`GET /api/v1/users`|Get all users|
+|`GET /api/v1/users/{id}`|Get specific user details|
+|`GET /api/v1/me`|Current logged In user|
+|`POST /api/v1/meetup/new/`|Create new meetUp|
+|`GET /api/v1/meetup/{id}`|Get a specific meetUp using Id|
+|`GET /api/v1/meeup`|Get all available meetUps|
+|`POST /api/v1/tags`|Create list of tags|
+
 ## Getting Started(With Docker)
 * Install [Docker](https://docs.docker.com/docker-for-mac/install/)
 ```sh
