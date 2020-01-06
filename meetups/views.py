@@ -4,6 +4,7 @@ from rest_framework.exceptions import ValidationError
 from meetups.models import MeetUp, Tag
 from .serializers import MeetUpSerializer, TagSerializer
 from rest_framework import generics, permissions
+from datetime import datetime
 
 
 class CreateMeetUpView(generics.CreateAPIView):
@@ -47,3 +48,12 @@ class CreateTagView(generics.ListCreateAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     permission_classes = (permissions.AllowAny,)
+
+
+class UpcomingMeetUPsView(generics.ListAPIView):
+    queryset = MeetUp.objects.all()
+    serializer_class = MeetUpSerializer
+
+    def get_queryset(self):
+        queryset = self.queryset
+        return queryset.filter(start_date__gte=datetime.now())
