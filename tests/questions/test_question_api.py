@@ -1,14 +1,9 @@
-from django.test import TestCase
-from rest_framework.test import APIClient
-from tests.factories import AccountFactory
 from rest_framework import status
 
+from tests.set_up import AuthenticateUser
 
-class QuestionPrivateAPITests(TestCase):
-    def setUp(self):
-        self.user = self.user = AccountFactory()
-        self.client = APIClient()
-        self.client.force_authenticate(user=self.user)
+
+class QuestionPrivateAPITests(AuthenticateUser):
 
     def test_create_question_successfully(self):
         res = self.client.post('/api/v1/questions/', {

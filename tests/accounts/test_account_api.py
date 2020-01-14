@@ -3,8 +3,8 @@ from rest_framework import status
 from django.urls import reverse
 from rest_framework.test import APIClient
 from tests.factories import AccountFactory
+from tests.set_up import AuthenticateUser
 
-# accounts:user-register => app_name:name(url)
 CREATE_ACCOUNT_ROUTE = reverse('accounts:user-register')
 CURRENT_ACCOUNT_ROUTE = reverse('accounts:me')
 
@@ -42,12 +42,7 @@ class AccountPublicAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-class AccountPrivateAPITests(TestCase):
-    def setUp(self):
-        self.user = self.user = AccountFactory()
-        self.client = APIClient()
-        self.client.force_authenticate(user=self.user)
-
+class AccountPrivateAPITests(AuthenticateUser):
     def test_fetch_user_successfully(self):
         res = self.client.get(CURRENT_ACCOUNT_ROUTE)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
