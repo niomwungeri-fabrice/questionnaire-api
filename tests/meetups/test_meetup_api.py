@@ -3,11 +3,11 @@ from datetime import datetime, timedelta
 from rest_framework import status
 from meetups.models import MeetUp
 from meetups.serializers import MeetUpSerializer
-from tests.factories import sample_meet_up, TagFactory
-from tests.set_up import AuthenticateUser
+from tests.factories import TagFactory, sample_meet_up
+from tests.set_up import BaseTest
 
 
-class PrivateMeetUpApiTests(AuthenticateUser):
+class PrivateMeetUpApiTests(BaseTest):
 
     def test_create_meet_up_successfully(self):
         tag = TagFactory()
@@ -26,7 +26,7 @@ class PrivateMeetUpApiTests(AuthenticateUser):
         payload = {
             "name": "20th Tech Summit",
             "venue": "Telecom House",
-            "event_type": "ATTRACTION",
+            "event_type": "CLASS_TRAINING_WORKSHOP",
         }
         res = self.client.post("/api/v1/meetups/new/", payload)
         self.assertEqual(res.data['detail'], "MeetUp already exist")
@@ -46,7 +46,6 @@ class PrivateMeetUpApiTests(AuthenticateUser):
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_fetch_meet_ups_successfully(self):
-        sample_meet_up(user=self.user, event_type="APPEARANCE_OR_SIGNING")
         res = self.client.get("/api/v1/meetups/")
         meet_ups = MeetUp.objects.all()
         serializer = MeetUpSerializer(meet_ups, many=True)
@@ -54,6 +53,5 @@ class PrivateMeetUpApiTests(AuthenticateUser):
         self.assertEqual(res.data, serializer.data)
 
     def test_fetch_upcoming_meet_ups(self):
-        sample_meet_up(user=self.user, event_type="SCREENING")
         res = self.client.get("/api/v1/meetups/upcoming/")
         self.assertEqual(res.status_code, status.HTTP_200_OK)

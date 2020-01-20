@@ -1,6 +1,7 @@
 import factory
 from meetups.models import MeetUp, Tag
 from accounts.models import User
+from questions.models import Question
 
 test_user = {"email": "admin@email.com", "password": "Password123"}
 
@@ -16,21 +17,37 @@ class AccountFactory(factory.DjangoModelFactory):
     is_superuser = False
 
 
+class TagFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Tag
+    name = factory.Sequence(lambda x: "tag%d" % x)
+
+
 class MeetUpFactory(factory.DjangoModelFactory):
     class Meta:
         model = MeetUp
 
     name = factory.Sequence(lambda x: "meeting%d" % x)
-    location = factory.Sequence(lambda x: "location%d" % x)
-    image_url = "https://factoryboy.readthedocs.io/en/latest/"
+    venue = factory.Sequence(lambda x: "venue%d" % x)
+    event_type = "CLASS_TRAINING_WORKSHOP"
     user = factory.SubFactory(AccountFactory)
+
+
+class QuestionFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Question
+    title = factory.Sequence(
+        lambda x: "Why the meeting is so boring ?%d" % x),
+    body = "It started a bit long for professionals",
+    meet_up = factory.SubFactory(MeetUpFactory)
+    created_by = factory.SubFactory(AccountFactory)
 
 
 def sample_meet_up(user, **kwargs):
     defaults = {
         "name": "20th Tech Summit",
         "venue": "Telecom House",
-        "event_type": "ATTRACTION",
+        "event_type": "CLASS_TRAINING_WORKSHOP",
     }
     defaults.update(kwargs)
     return MeetUp.objects.create(user=user, **defaults)
@@ -54,9 +71,3 @@ def sample_super_user(email="admin1@email.com",
         is_staff=is_staff
     )
     return user
-
-
-class TagFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = Tag
-    name = factory.Sequence(lambda x: "tag%d" % x)
