@@ -1,7 +1,7 @@
 from unittest import TestCase
 from questions.models import Question, Comment
 from tests.factories import sample_user, test_user, sample_super_user
-from tests.set_up import AuthenticateUser
+from tests.set_up import BaseTest
 from meetups.models import MeetUp, Tag
 
 
@@ -30,22 +30,27 @@ class AccountModelTests(TestCase):
             sample_user(email=None, password='2489284kdjf')
 
 
-class QuestionModelTests(AuthenticateUser):
-
+class QuestionModelTests(BaseTest):
     def test_create_question(self):
-        question = Question.objects.create(user=self.user, body="body1038")
+        question = Question.objects.create(created_by=self.user,
+                                           body="body1038",
+                                           meet_up=self.meet_up)
         self.assertEqual(str(question), question.body)
 
 
-class CommentModelTests(AuthenticateUser):
+class CommentModelTests(BaseTest):
     def test_create_comment_successfully(self):
-        question = Question.objects.create(user=self.user, body="body1038")
-        comment = Comment.objects.create(user=self.user, question=question,
+        question = Question.objects.create(created_by=self.user,
+                                           title="title48",
+                                           body="body1038",
+                                           meet_up=self.meet_up)
+        comment = Comment.objects.create(user=self.user,
+                                         question=question,
                                          body="comment body487")
         self.assertEqual(str(comment), comment.body)
 
 
-class MeetUpsModelTests(AuthenticateUser):
+class MeetUpsModelTests(BaseTest):
     def test_create_meetUps_successfully(self):
         payload = {
             "name": "Another meeting",
@@ -56,7 +61,7 @@ class MeetUpsModelTests(AuthenticateUser):
         self.assertEqual(str(meet_up), meet_up.name)
 
 
-class TagModelTests(AuthenticateUser):
+class TagModelTests(BaseTest):
     def test_create_comment_successfully(self):
         tag = Tag.objects.create(name="tag body487")
         self.assertEqual(str(tag), tag.name)

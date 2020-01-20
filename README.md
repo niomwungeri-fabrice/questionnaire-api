@@ -20,11 +20,14 @@ Crowd-source questions for a meetUp. ​Questioner​​ helps the meetUp organi
 |`GET /api/v1/meetup/{id}`|Get a specific meetUp using Id|
 |`GET /api/v1/meeup`|Get all available meetUps|
 |`POST /api/v1/tags`|Create list of tags|
-|`POST api/v1/questions/`|Create a question|
-|`GET api/v1/questions/`|Get list of all questions|
-|`PUT/PATCH api/v1/questions/{id}`| Update a question|
-|`DELETE api/v1/questions/{id}`|Delete a question|
-|`GET api/v1/questions/{id}`|Get a specific question|
+|`POST /api/v1/questions/`|Create a question|
+|`GET /api/v1/questions/`|Get list of all questions|
+|`PUT/PATCH /api/v1/questions/{id}`| Update a question|
+|`DELETE /api/v1/questions/{id}`|Delete a question|
+|`GET /api/v1/questions/{id}`|Get a specific question|
+|`PATCH api/v1/questions/{id}/upvote`|UpVote (increase votes by 1) a specific question.|
+|`PATCH api/v1/questions/{id}/downvote`|DownVote (decrease votes by 1) a specific question.|
+
 ## Getting Started(With Docker)
 * Install [Docker](https://docs.docker.com/docker-for-mac/install/)
 ```sh
